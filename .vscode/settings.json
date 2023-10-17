@@ -1,0 +1,10 @@
+{
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript"],
+  "editor.formatOnSave": false,
+  "editor.tabSize": 2,
+  "diffEditor.ignoreTrimWhitespace": false
+}
