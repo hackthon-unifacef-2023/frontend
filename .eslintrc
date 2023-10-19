@@ -1,48 +1,33 @@
 {
-  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true,
-    "es6": true
+    "node": true,
+    "es2021": true
   },
   "extends": [
+    "prettier",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["react"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "plugins": ["prettier", "react"],
   "rules": {
-    "arrow-parens": ["error", "always"],
-    "arrow-spacing": ["error"],
-    "block-spacing": ["error", "always"],
-    "brace-style": ["error", "1tbs"],
-    "comma-dangle": ["error", "always-multiline"],
-    "comma-spacing": ["error", { "before": false, "after": true }],
-    "comma-style": ["error"],
-    "eol-last": ["error"],
-    "func-call-spacing": ["error"],
-    "indent": ["error", 2],
-    "jsx-quotes": ["error", "prefer-single"],
-    "key-spacing": ["error"],
-    "keyword-spacing": ["error"],
-    "react/jsx-max-props-per-line": [
-      "error",
-      {
-        "maximum": 1
-      }
-    ],
-    "multiline-ternary": ["error"],
-    "no-multi-spaces": ["error"],
-    "no-multiple-empty-lines": ["error"],
-    "no-trailing-spaces": ["error"],
-    "no-whitespace-before-property": ["error"],
-    "padding-line-between-statements": [
-      "error",
-      { "blankLine": "always", "prev": "*", "next": "return" }
-    ],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
-    "semi-spacing": ["error"],
-    "space-before-blocks": "error",
-    "space-infix-ops": "error"
+    "prettier/prettier": ["warn", { "usePrettierrc": true }],
+    "eqeqeq": ["warn", "smart"],
+    "no-unused-vars": ["off"],
+    "react/prefer-stateless-function": ["off"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "no-empty-pattern": ["off"],
+    "import/named": "off",
+    "import/no-unresolved": "off",
+    "no-unreachable": "off"
   }
 }

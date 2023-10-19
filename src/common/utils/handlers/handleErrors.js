@@ -1,7 +1,7 @@
 export const handleErrors = (error) => {
   let response = {
     success: false,
-    message: 'Sistema indisponível no momento. Tente novamente mais tarde.',
+    message: 'Sistema indisponível no momento. Tente novamente mais tarde.'
   };
 
   if (error?.response?.data?.messages) {

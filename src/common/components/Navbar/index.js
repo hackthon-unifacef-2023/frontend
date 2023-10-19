@@ -31,7 +31,8 @@ const NavbarComponent = () => {
             onClick={() => {
               localStorage.removeItem('TOKEN_KEY');
               history.push('/login');
-            }}>
+            }}
+          >
             Logout
           </Nav.Link>
         </Nav>

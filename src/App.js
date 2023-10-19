@@ -11,7 +11,7 @@ const options = {
   position: positions.TOP_RIGHT,
   timeout: 5000,
   offset: '5px',
-  transition: transitions.SCALE,
+  transition: transitions.SCALE
 };
 
 function App() {

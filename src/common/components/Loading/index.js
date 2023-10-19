@@ -9,7 +9,8 @@ const Loading = ({ loadingState }) => {
       show={loadingState}
       onHide={() => {}}
       centered
-      aria-labelledby="contained-modal-title-vcenter">
+      aria-labelledby="contained-modal-title-vcenter"
+    >
       <div>
         <Spinner
           animation={'border'}
@@ -18,7 +19,7 @@ const Loading = ({ loadingState }) => {
             borderRightColor: 'transparent',
             width: '3rem',
             height: '3rem',
-            animationDuration: '1.5s',
+            animationDuration: '1.5s'
           }}
         />
       </div>
@@ -27,7 +28,7 @@ const Loading = ({ loadingState }) => {
 };
 
 Loading.propTypes = {
-  loadingState: PropTypes.bool,
+  loadingState: PropTypes.bool
 };
 
 export default Loading;

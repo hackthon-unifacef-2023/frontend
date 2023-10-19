@@ -40,7 +40,7 @@ CustomRoute.propTypes = {
   exact: PropTypes.bool,
   path: PropTypes.string,
   component: PropTypes.any,
-  history: PropTypes.func,
+  history: PropTypes.func
 };
 
 export default CustomRoute;

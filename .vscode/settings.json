@@ -4,7 +4,7 @@
     "source.fixAll.eslint": true
   },
   "eslint.validate": ["javascript"],
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "diffEditor.ignoreTrimWhitespace": false
 }

@@ -1,47 +1,29 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from '../../common/context/context';
 import { useAlert } from 'react-alert';
 import { Container, Footer } from './styles';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { validateEmail } from '../../common/utils/validators';
-import { create, getAll } from '../../services/register';
-import { maskCRC, removeMaskCRC } from '../../common/utils/masks';
+import { create } from '../../services/register';
 
 const Register = () => {
   const [user, setUser] = useState({
     name: '',
     email: '',
-    accountantLicense: '',
-    accountingOfficeId: 'invalid',
-    password: '',
+    password: ''
   });
   const [errors, setErrors] = useState({
     nameError: false,
     emailError: false,
-    accountantLicenseError: false,
-    accountingOfficeIdError: false,
     passwordError: false,
-    confirmPasswordError: false,
+    confirmPasswordError: false
   });
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [offices, setOffices] = useState([]);
   const { setLoading } = useContext(Context);
   const alert = useAlert();
 
-  useEffect(async () => {
-    const response = await getAll();
-
-    if (response.success) {
-      setOffices(response.data.data);
-    }
-  }, []);
-
   const handleChange = (key, value) => {
-    if (key !== 'accountantLicense') {
-      setUser({ ...user, [key]: value });
-    } else if (key === 'accountantLicense' && value.length < 14) {
-      setUser({ ...user, [key]: value });
-    }
+    setUser({ ...user, [key]: value });
   };
 
   const handleError = (field, boolean) => {
@@ -64,18 +46,6 @@ const Register = () => {
       isValid = false;
     }
 
-    if (accountantLicense === '') {
-      handleError('accountantLicenseError', true);
-      alert.error('CRC não pode estar em branco.');
-      isValid = false;
-    }
-
-    if (accountingOfficeId === 'invalid') {
-      handleError('officeError', true);
-      alert.error('Escritório não pode estar em branco.');
-      isValid = false;
-    }
-
     if (password.length < 8) {
       handleError('passwordError', true);
       alert.error('Senha deve ter ao menos 8 caracteres');
@@ -91,23 +61,17 @@ const Register = () => {
 
     if (!isValid) return;
 
-    user.accountantLicense = removeMaskCRC(accountantLicense);
-
     setLoading(true);
     const response = await create(user);
     setLoading(false);
 
     if (!response.success) {
-      handleChange('accountantLicense', accountantLicense);
-
       return alert.error(response.message);
     } else {
       setUser({
         name: '',
         email: '',
-        accountantLicense: '',
-        accountingOfficeId: '',
-        password: '',
+        password: ''
       });
       setConfirmPassword('');
       return alert.success('Usuário cadastrado com sucesso!');
@@ -146,46 +110,6 @@ const Register = () => {
                       handleError('emailError', false);
                     }}
                   />
-                </Form.Group>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col md={6}>
-                <Form.Group className="mb-3" controlId="formBasic3">
-                  <Form.Control
-                    style={{ textTransform: 'uppercase' }}
-                    type="text"
-                    placeholder="CRC (Ex: 1SP123456/6-0)"
-                    isInvalid={errors.accountantLicenseError}
-                    value={user.accountantLicense}
-                    onChange={(e) => {
-                      handleChange('accountantLicense', maskCRC(e.target.value));
-                      handleError('accountantLicenseError', false);
-                    }}
-                  />
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group className="mb-3" controlId="formBasic4">
-                  <Form.Control
-                    as="select"
-                    size="small"
-                    isInvalid={errors.officeError}
-                    value={user.accountingOfficeId}
-                    onChange={(e) => {
-                      handleChange('accountingOfficeId', e.target.value);
-                      handleError('officeError', false);
-                    }}>
-                    <option value="invalid">Selecione o Escritório</option>
-                    {offices.map((office, key) => {
-                      return (
-                        <option style={{ textTransform: 'uppercase' }} key={key} value={office.id}>
-                          {office.name}
-                        </option>
-                      );
-                    })}
-                  </Form.Control>
                 </Form.Group>
               </Col>
             </Row>

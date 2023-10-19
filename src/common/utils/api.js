@@ -6,8 +6,8 @@ export const axiosDefault = () => {
     baseURL: 'http://10.0.12.93:3000/',
     headers: {
       Authorization: token ? `Bearer ${token}` : undefined,
-      withCredentials: true,
-    },
+      withCredentials: true
+    }
   };
 
   return axios.create(configs);
