@@ -17,6 +17,7 @@ const Organizations = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [info, setInfo] = useState([]);
   const { setLoading } = useContext(Context);
+  const [eventInfo, setEventInfo] = useState({});
 
   useEffect(() => {
     handleGetEvents();
@@ -36,13 +37,21 @@ const Organizations = () => {
     setLoading(false);
   };
 
+  const handleEvent = (userInfo) => {
+    setEventInfo(userInfo);
+    setShow(true);
+    setIsEdit(true);
+
+    console.log(userInfo);
+  };
+
   const renderImages = (reason) => {
     switch (reason) {
       case 'Reflorestamento':
         return (
           <Card.Img style={{ width: '100%', height: '200px' }} variant="top" src={Reflorestation} />
         );
-      case 'Desastres Naturais':
+      case 'Desastres naturais':
         return (
           <Card.Img
             style={{ width: '100%', height: '200px' }}
@@ -50,7 +59,7 @@ const Organizations = () => {
             src={NaturalDisaster}
           />
         );
-      case 'Serviços Sociais':
+      case 'Serviços sociais':
         return (
           <Card.Img
             style={{ width: '100%', height: '200px' }}
@@ -58,7 +67,7 @@ const Organizations = () => {
             src={CommunityService}
           />
         );
-      case 'Coleta de Lixo':
+      case 'Coleta de lixo':
         return (
           <Card.Img
             style={{ width: '100%', height: '200px' }}
@@ -66,7 +75,7 @@ const Organizations = () => {
             src={GarbageCollector}
           />
         );
-      case 'Saude da Comunidade':
+      case 'Saúde da comunidade':
         return (
           <Card.Img
             style={{ width: '100%', height: '200px' }}
@@ -74,8 +83,8 @@ const Organizations = () => {
             src={CommunityHealth}
           />
         );
-      case 'Causa Animal':
-        return <Card.Img variant="top" src={PetCare} />;
+      case 'Causa animal':
+        return <Card.Img style={{ width: '100%', height: '200px' }} variant="top" src={PetCare} />;
       default:
         return (
           <Card.Img style={{ width: '100%', height: '200px' }} variant="top" src={Sustainability} />
@@ -85,6 +94,13 @@ const Organizations = () => {
 
   return (
     <>
+      <ModalAction
+        openModal={show}
+        handleCloseModal={handleClose}
+        info={eventInfo}
+        isEdit={isEdit}
+        callback={handleGetEvents}
+      />
       <Container>
         <Row className="mb-3 w-100 mw-100" style={{ justifyContent: 'start' }}>
           <Col md={6}>
@@ -105,7 +121,7 @@ const Organizations = () => {
             </Button>
           </Col>
         </Row>
-        <Row className="w-100 mw-100" style={{ gap: '10px', justifyContent: 'flex-start' }}>
+        <Row className="w-100 mw-100" style={{ gap: '10px', justifyContent: 'center' }}>
           {info.map((item, index) => {
             return (
               <Col key={index} sm={6} md={3} lg={3}>
@@ -118,23 +134,13 @@ const Organizations = () => {
                       Razão: {item.reason}{' '}
                     </Card.Text>
                     <Button
-                      onClick={() => {
-                        setIsEdit(true);
-                        handleShow();
-                      }}
+                      onClick={() => handleEvent(item)}
                       style={{ backgroundColor: '#22c55e', borderColor: '#22c55e' }}
                     >
                       Mais Detalhes
                     </Button>
                   </Card.Body>
                 </Card>
-                <ModalAction
-                  openModal={show}
-                  handleCloseModal={handleClose}
-                  info={item}
-                  isEdit={isEdit}
-                  callback={handleGetEvents}
-                />
               </Col>
             );
           })}

@@ -14,12 +14,14 @@ const ModalAction = ({ openModal, handleCloseModal, info, callback, isEdit }) =>
     { name: 'AUXILIO_FINANCEIRO', label: 'Auxílio financeiro' }
   ];
 
+  console.log(info);
+
   const reasons = [
     { name: 'REFLORESTAMENTO', label: 'Reflorestamento' },
     { name: 'DESASTRES_NATURAIS', label: 'Desastres Naturais' },
     { name: 'SERVIÇOS_SOCIAIS', label: 'Serviços Sociais' },
     { name: 'COLETA_DE_LIXO', label: 'Coleta de Lixo' },
-    { name: 'SAUDE_DA_COMUNIDADE', label: 'Saude da Comunidade' },
+    { name: 'SAUDE_DA_COMUNIDADE', label: 'Saúde da Comunidade' },
     { name: 'CAUSA_ANIMAL', label: 'Causa Animal' }
   ];
 
@@ -69,7 +71,11 @@ const ModalAction = ({ openModal, handleCloseModal, info, callback, isEdit }) =>
     }
 
     if (event.type === 'AUXILIO_FINANCEIRO') {
+      console.log('entrou aqui');
+      console.log(event.pix_code);
       if (event.pix_code === '') {
+        console.log('entrou aqui 2');
+
         handleError('pix_codeError', true);
         alert.error('Código pix não pode estar em branco');
         isValid = false;
@@ -83,7 +89,7 @@ const ModalAction = ({ openModal, handleCloseModal, info, callback, isEdit }) =>
     }
 
     if (!isValid) return;
-    if (event.pix_code !== 'AUXILIO_FINANCEIRO') delete event.pix_code;
+    if (event.type !== 'AUXILIO_FINANCEIRO') delete event.pix_code;
 
     setLoading(true);
     const response = await create(event);
@@ -93,14 +99,20 @@ const ModalAction = ({ openModal, handleCloseModal, info, callback, isEdit }) =>
       return alert.error(response.message);
     }
 
+    window.location.reload();
+
     callback();
     handleCloseModal();
 
     return alert.success('Evento cadastrado com sucesso');
   };
 
-  const handleChangeState = (type) => {
+  const handleChangeType = (type) => {
     return setEvent(() => ({ ...event, type }));
+  };
+
+  const handleChangeReason = (reason) => {
+    return setEvent(() => ({ ...event, reason }));
   };
 
   return (
@@ -149,7 +161,7 @@ const ModalAction = ({ openModal, handleCloseModal, info, callback, isEdit }) =>
                     }}
                     aria-label="Default select example"
                     value={event.type}
-                    onChange={(event) => handleChangeState(event.target.value)}
+                    onChange={(event) => handleChangeType(event.target.value)}
                   >
                     {types.map((item) => {
                       return (
@@ -173,8 +185,8 @@ const ModalAction = ({ openModal, handleCloseModal, info, callback, isEdit }) =>
                       borderRadius: '10px'
                     }}
                     aria-label="Default select example"
-                    value={event.type}
-                    onChange={(event) => handleChangeState(event.target.value)}
+                    value={event.reason}
+                    onChange={(event) => handleChangeReason(event.target.value)}
                   >
                     {reasons.map((item) => {
                       return (
