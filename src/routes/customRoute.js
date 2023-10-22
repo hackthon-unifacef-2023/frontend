@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 
 const CustomRoute = ({ isPrivate, exact, path, component }) => {
   const { loading } = useContext(Context);
-  const { setAuth } = useContext(Context);
   const history = useHistory();
 
   useEffect(async () => {

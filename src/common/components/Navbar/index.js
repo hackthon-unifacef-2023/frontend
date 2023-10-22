@@ -9,7 +9,8 @@ const NavbarComponent = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('TOKEN_KEY');
-    history.push('/logsin');
+    localStorage.removeItem('isAdmin');
+    history.push('/login');
   };
 
   return (

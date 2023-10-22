@@ -5,11 +5,8 @@ const Context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
-  const [auth, setAuth] = useState();
 
-  return (
-    <Context.Provider value={{ loading, setLoading, auth, setAuth }}>{children}</Context.Provider>
-  );
+  return <Context.Provider value={{ loading, setLoading }}>{children}</Context.Provider>;
 };
 
 ContextProvider.propTypes = { children: PropTypes.any };

@@ -13,7 +13,7 @@ const Login = () => {
   const [user, setUser] = useState({ email: '', password: '' });
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const { setLoading, setAuth } = useContext(Context);
+  const { setLoading } = useContext(Context);
   const alert = useAlert();
   const history = useHistory();
 
@@ -46,11 +46,6 @@ const Login = () => {
     if (!response.success) {
       return alert.error(response.message);
     }
-
-    localStorage.setItem('isAdmin', response.data.is_admin);
-    localStorage.setItem('TOKEN_KEY', response.data.token);
-
-    setAuth(response.data);
 
     if (response.data.is_admin) {
       history.push('/admin');

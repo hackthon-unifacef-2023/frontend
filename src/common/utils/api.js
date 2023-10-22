@@ -6,7 +6,7 @@ export const axiosDefault = () => {
   const configs = {
     baseURL: 'http://10.0.34.72:6969',
     headers: {
-      Authorization: token ? `Bearer ${token}` : undefined,
+      Authorization: `Bearer ${token}`,
       withCredentials: true
     }
   };
