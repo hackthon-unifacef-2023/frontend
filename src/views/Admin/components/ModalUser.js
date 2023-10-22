@@ -49,6 +49,8 @@ const ModalUser = ({ openModal, handleCloseModal, user, callback }) => {
   const handleGetOrganizations = async (eventId) => {
     setLoading(true);
     const response = await getAll();
+    setLoading(false);
+
     let eventFound = {};
 
     if (response.success) {
@@ -62,7 +64,7 @@ const ModalUser = ({ openModal, handleCloseModal, user, callback }) => {
 
       user.events.find((item) => {
         if (item.id === eventId) {
-          item = eventFound;
+          item.is_active = true;
         }
       });
 
@@ -70,8 +72,6 @@ const ModalUser = ({ openModal, handleCloseModal, user, callback }) => {
 
       return user;
     }
-
-    setLoading(false);
   };
 
   return (
@@ -84,52 +84,59 @@ const ModalUser = ({ openModal, handleCloseModal, user, callback }) => {
         callback={(id) => handleGetOrganizations(id)}
       />
       <Modal size="lg" centered show={openModal} onHide={() => handleCloseModal()}>
-        <Modal.Header className="d-flex justify-content-center">
+        <Modal.Header className="d-flex justify-content-start">
           <Modal.Title>Informações da Organização</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Row className="p-2 justify-content-center ">
+          <Row className="p-2  justify-content-center w-100">
             <Form>
               <Row>
                 <Col md={12}>
-                  <Form.Group className="mb-3" controlId="name">
+                  <Form.Group className="mb-2" controlId="name">
+                    <Form.Label>Nome</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Nome"
                       value={user.name}
                       disabled={true}
+                      style={{ borderRadius: '10px' }}
                     />
                   </Form.Group>
                 </Col>
               </Row>
               <Row>
                 <Col md={6}>
-                  <Form.Group className="mb-3" controlId="email">
+                  <Form.Group className="mb-2" controlId="email">
+                    <Form.Label>E-mail</Form.Label>
                     <Form.Control
                       type="email"
                       placeholder="E-mail"
                       value={user.email}
                       disabled={true}
+                      style={{ borderRadius: '10px' }}
                     />
                   </Form.Group>
                 </Col>
                 <Col md={6}>
-                  <Form.Group className="mb-3" controlId="phone">
+                  <Form.Group className="mb-2" controlId="phone">
+                    <Form.Label>Telefone</Form.Label>
                     <Form.Control
                       type="string"
                       placeholder="Telefone"
                       value={user.phone}
                       disabled={true}
+                      style={{ borderRadius: '10px' }}
                     />
                   </Form.Group>
                 </Col>
               </Row>
               <Row>
                 <Col md={12}>
-                  <Form.Group className="mb-3" controlId="description">
+                  <Form.Group className="mb-2" controlId="description">
+                    <Form.Label>Descrição</Form.Label>
                     <Form.Control
                       as="textarea"
-                      style={{ height: '100px' }}
+                      style={{ height: '100px', borderRadius: '10px' }}
                       placeholder="Descrição"
                       value={user.description}
                       disabled={true}
@@ -140,67 +147,77 @@ const ModalUser = ({ openModal, handleCloseModal, user, callback }) => {
               {user.has_address ? (
                 <>
                   <Row>
-                    <Col md={6}>
-                      <Form.Group className="mb-3" controlId="zip_code">
+                    <Col md={4}>
+                      <Form.Group className="mb-2" controlId="zip_code">
+                        <Form.Label>CEP</Form.Label>
                         <Form.Control
                           type="string"
                           placeholder="CEP"
                           value={user.zip_code}
                           disabled={true}
+                          style={{ borderRadius: '10px' }}
                         />
                       </Form.Group>
                     </Col>
-                    <Col md={6}>
-                      <Form.Group className="mb-3" controlId="city">
-                        <Form.Control
-                          type="string"
-                          placeholder="Rua"
-                          value={user.street}
-                          disabled={true}
-                        />
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6}>
-                      <Form.Group className="mb-3" controlId="district">
-                        <Form.Control
-                          type="string"
-                          placeholder="Bairro"
-                          value={user.district}
-                          disabled={true}
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col md={6}>
-                      <Form.Group className="mb-3" controlId="string">
-                        <Form.Control
-                          type="string"
-                          placeholder="Número"
-                          value={user.number}
-                          disabled={true}
-                        />
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6}>
-                      <Form.Group className="mb-3" controlId="state">
+                    <Col md={4}>
+                      <Form.Group className="mb-2" controlId="state">
+                        <Form.Label>Estado</Form.Label>
                         <Form.Control
                           type="string"
                           placeholder="Estado"
                           value={user.state}
                           disabled={true}
+                          style={{ borderRadius: '10px' }}
                         />
                       </Form.Group>
                     </Col>
-                    <Col md={6}>
-                      <Form.Group className="mb-3" controlId="city">
+                    <Col md={4}>
+                      <Form.Group className="mb-2" controlId="city">
+                        <Form.Label>Cidade</Form.Label>
                         <Form.Control
                           type="string"
                           placeholder="Cidade"
                           value={user.city}
                           disabled={true}
+                          style={{ borderRadius: '10px' }}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md={4}>
+                      <Form.Group className="mb-2" controlId="city">
+                        <Form.Label>Rua</Form.Label>
+                        <Form.Control
+                          type="string"
+                          placeholder="Rua"
+                          value={user.street}
+                          disabled={true}
+                          style={{ borderRadius: '10px' }}
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={4}>
+                      <Form.Group className="mb-2" controlId="district">
+                        <Form.Label>Bairro</Form.Label>
+                        <Form.Control
+                          type="string"
+                          placeholder="Bairro"
+                          value={user.district}
+                          disabled={true}
+                          style={{ borderRadius: '10px' }}
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={4}>
+                      <Form.Group className="mb-2" controlId="string">
+                        <Form.Label>Número</Form.Label>
+                        <Form.Control
+                          type="string"
+                          placeholder="Número"
+                          value={user.number}
+                          disabled={true}
+                          style={{ borderRadius: '10px' }}
                         />
                       </Form.Group>
                     </Col>
@@ -211,7 +228,7 @@ const ModalUser = ({ openModal, handleCloseModal, user, callback }) => {
               )}
             </Form>
           </Row>
-          <Row style={{ textAlign: 'center' }}>
+          <Row style={{ textAlign: 'initial' }}>
             <Col>
               <h4>Listagem de Ações</h4>
             </Col>

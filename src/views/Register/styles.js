@@ -6,7 +6,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 93vh;
+  height: 90vh;
   background-color: white;
 `;
 
@@ -16,7 +16,6 @@ export const Footer = styled.div`
   position: fixed;
   bottom: 0;
   align-items: end;
-  height: 7vh;
+  height: 10vh;
   width: 100%;
-  background-color: black;
 `;

@@ -44,6 +44,7 @@ const ModalAction = ({ openModal, handleCloseModal, info, isStatic, callback = f
             <Row>
               <Col md={12}>
                 <Form.Group className="mb-3" controlId="name">
+                  <Form.Label>Nome</Form.Label>
                   <Form.Control type="text" placeholder="Nome" value={info.name} disabled={true} />
                 </Form.Group>
               </Col>
@@ -51,11 +52,13 @@ const ModalAction = ({ openModal, handleCloseModal, info, isStatic, callback = f
             <Row>
               <Col md={4}>
                 <Form.Group className="mb-3" controlId="state">
+                  <Form.Label>Tipo</Form.Label>
                   <Form.Control type="text" placeholder="Nome" value={info.type} disabled={true} />
                 </Form.Group>
               </Col>
               <Col md={4}>
                 <Form.Group className="mb-3" controlId="state">
+                  <Form.Label>Categoria</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Nome"
@@ -66,6 +69,7 @@ const ModalAction = ({ openModal, handleCloseModal, info, isStatic, callback = f
               </Col>
               <Col md={4}>
                 <Form.Group className="mb-3" controlId="pix_code">
+                  <Form.Label>Código Pagamento</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Código Pix"
@@ -77,13 +81,16 @@ const ModalAction = ({ openModal, handleCloseModal, info, isStatic, callback = f
             </Row>
             <Row>
               <Col md={12}>
-                <Form.Control
-                  as="textarea"
-                  placeholder="Descrição"
-                  style={{ height: '300px' }}
-                  value={info.description}
-                  disabled={true}
-                />
+                <Form.Group>
+                  <Form.Label>Descrição</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Descrição"
+                    style={{ height: '300px' }}
+                    value={info.description}
+                    disabled={true}
+                  />
+                </Form.Group>
               </Col>
             </Row>
           </Form>
@@ -93,12 +100,16 @@ const ModalAction = ({ openModal, handleCloseModal, info, isStatic, callback = f
         <Button style={{ width: '150px' }} variant="secondary" onClick={() => handleCloseModal()}>
           Fechar
         </Button>
-        <Button
-          style={{ width: '150px', backgroundColor: '#22c55e', borderColor: '#22c55e' }}
-          onClick={() => handleActiveEvent()}
-        >
-          Aprovar
-        </Button>
+        {info.is_active === 0 ? (
+          <Button
+            style={{ width: '150px', backgroundColor: '#22c55e', borderColor: '#22c55e' }}
+            onClick={() => handleActiveEvent()}
+          >
+            Aprovar
+          </Button>
+        ) : (
+          <></>
+        )}
       </Modal.Footer>
     </Modal>
   );

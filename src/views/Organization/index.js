@@ -2,9 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Card, Col, Pagination, Row } from 'react-bootstrap';
 import { Context } from '../../common/context/context';
 import { Container } from './styles';
-import { maskCnpj, maskPhone } from '../../common/utils/masks';
 import ModalAction from './components/ModalAction';
 import { getAll } from '../../services/organization';
+import PetCare from '../../assets/cards/pet_care.jpg';
+import Reflorestation from '../../assets/cards/reflorestation.jpg';
+import CommunityService from '../../assets/cards/community_service.jpg';
+import GarbageCollector from '../../assets/cards/garbage_collector.jpg';
+import NaturalDisaster from '../../assets/cards/natural_disaster.jpg';
+import CommunityHealth from '../../assets/cards/communiy_health.jpg';
+import Sustainability from '../../assets/cards/sustenaibility.jpg';
 
 const Organizations = () => {
   const [show, setShow] = useState(false);
@@ -19,14 +25,6 @@ const Organizations = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleModal = (value) => {
-    handleShow();
-
-    setLoading(true);
-    handleGetEvents();
-    setLoading(false);
-  };
-
   const handleGetEvents = async () => {
     setLoading(true);
     const response = await getAll();
@@ -36,6 +34,53 @@ const Organizations = () => {
     }
 
     setLoading(false);
+  };
+
+  const renderImages = (reason) => {
+    switch (reason) {
+      case 'Reflorestamento':
+        return (
+          <Card.Img style={{ width: '100%', height: '200px' }} variant="top" src={Reflorestation} />
+        );
+      case 'Desastres Naturais':
+        return (
+          <Card.Img
+            style={{ width: '100%', height: '200px' }}
+            variant="top"
+            src={NaturalDisaster}
+          />
+        );
+      case 'Serviços Sociais':
+        return (
+          <Card.Img
+            style={{ width: '100%', height: '200px' }}
+            variant="top"
+            src={CommunityService}
+          />
+        );
+      case 'Coleta de Lixo':
+        return (
+          <Card.Img
+            style={{ width: '100%', height: '200px' }}
+            variant="top"
+            src={GarbageCollector}
+          />
+        );
+      case 'Saude da Comunidade':
+        return (
+          <Card.Img
+            style={{ width: '100%', height: '200px' }}
+            variant="top"
+            src={CommunityHealth}
+          />
+        );
+      case 'Causa Animal':
+        return <Card.Img variant="top" src={PetCare} />;
+      default:
+        return (
+          <Card.Img style={{ width: '100%', height: '200px' }} variant="top" src={Sustainability} />
+        );
+    }
   };
 
   return (
@@ -60,30 +105,29 @@ const Organizations = () => {
             </Button>
           </Col>
         </Row>
-        <Row className=" w-100 mw-100" style={{ gap: '10px', justifyContent: 'flex-start' }}>
-          {info.map((item) => {
+        <Row className="w-100 mw-100" style={{ gap: '10px', justifyContent: 'flex-start' }}>
+          {info.map((item, index) => {
             return (
-              <div style={{ width: '100%' }} key={item.id}>
-                <Col sm={6} md={3} lg={3}>
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>{item.name}</Card.Title>
-                      <Card.Text>
-                        Categoria: {item.type} <br />
-                        Razão: {item.reason}{' '}
-                      </Card.Text>
-                      <Button
-                        onClick={() => {
-                          setIsEdit(true);
-                          handleShow();
-                        }}
-                        style={{ backgroundColor: '#22c55e', borderColor: '#22c55e' }}
-                      >
-                        Mais Detalhes
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                </Col>
+              <Col key={index} sm={6} md={3} lg={3}>
+                <Card style={{ width: '400px' }}>
+                  {renderImages(item.reason)}
+                  <Card.Body>
+                    <Card.Title>{item.name}</Card.Title>
+                    <Card.Text>
+                      Categoria: {item.type} <br />
+                      Razão: {item.reason}{' '}
+                    </Card.Text>
+                    <Button
+                      onClick={() => {
+                        setIsEdit(true);
+                        handleShow();
+                      }}
+                      style={{ backgroundColor: '#22c55e', borderColor: '#22c55e' }}
+                    >
+                      Mais Detalhes
+                    </Button>
+                  </Card.Body>
+                </Card>
                 <ModalAction
                   openModal={show}
                   handleCloseModal={handleClose}
@@ -91,7 +135,7 @@ const Organizations = () => {
                   isEdit={isEdit}
                   callback={handleGetEvents}
                 />
-              </div>
+              </Col>
             );
           })}
           {!isEdit && (

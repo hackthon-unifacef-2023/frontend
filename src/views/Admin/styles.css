@@ -28,7 +28,7 @@
 
 .fl-table thead th {
   color: #ffffff;
-  background: #007bff;
+  background: grey;
 }
 
 .fl-table tr:hover {
@@ -41,11 +41,11 @@
 
 .fl-table thead th:nth-child(odd) {
   color: #ffffff;
-  background: #007bff;
+  background: grey;
 }
 
 .fl-table tr:nth-child(even) {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 
 /* Responsive */
@@ -57,7 +57,7 @@
   }
 
   .table-wrapper:before {
-    content: "Scroll horizontally >";
+    content: 'Scroll horizontally >';
     display: block;
     text-align: right;
     font-size: 11px;
@@ -87,7 +87,7 @@
 
   .fl-table td,
   .fl-table th {
-    padding: 20px .625em .625em .625em;
+    padding: 20px 0.625em 0.625em 0.625em;
     height: 60px;
     vertical-align: middle;
     box-sizing: border-box;
@@ -116,12 +116,12 @@
   }
 
   .fl-table tr td:nth-child(odd) {
-    background: #F8F8F8;
-    border-right: 1px solid #E6E4E4;
+    background: #f8f8f8;
+    border-right: 1px solid #e6e4e4;
   }
 
   .fl-table tr td:nth-child(even) {
-    border-right: 1px solid #E6E4E4;
+    border-right: 1px solid #e6e4e4;
   }
 
   .fl-table tbody td {
@@ -176,7 +176,7 @@
 
 .modal-1 a {
   border-color: #ddd;
-  color: #4285F4;
+  color: #4285f4;
   background: #fff;
 }
 
@@ -186,7 +186,8 @@
 
 .modal-1 a.active,
 .modal-1 a:active {
-  border-color: #4285F4;
-  background: #4285F4;
+  border-color: grey;
+  background: grey;
   color: #fff;
+  font-weight: bolder;
 }

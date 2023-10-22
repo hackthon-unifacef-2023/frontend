@@ -122,6 +122,7 @@ const ModalAction = ({ openModal, handleCloseModal, info, callback, isEdit }) =>
               <Col md={12}>
                 <Form.Group className="mb-3" controlId="name">
                   <Form.Control
+                    style={{ borderRadius: '10px' }}
                     type="text"
                     placeholder="Nome"
                     isInvalid={errors.nameError}
@@ -143,7 +144,8 @@ const ModalAction = ({ openModal, handleCloseModal, info, callback, isEdit }) =>
                       height: '37px',
                       borderColor: 'darkGrey',
                       backgroundColor: 'white',
-                      color: 'dimgrey'
+                      color: 'dimgrey',
+                      borderRadius: '10px'
                     }}
                     aria-label="Default select example"
                     value={event.type}
@@ -167,7 +169,8 @@ const ModalAction = ({ openModal, handleCloseModal, info, callback, isEdit }) =>
                       height: '37px',
                       borderColor: 'darkGrey',
                       backgroundColor: 'white',
-                      color: 'dimgrey'
+                      color: 'dimgrey',
+                      borderRadius: '10px'
                     }}
                     aria-label="Default select example"
                     value={event.type}
@@ -186,11 +189,11 @@ const ModalAction = ({ openModal, handleCloseModal, info, callback, isEdit }) =>
               <Col md={4}>
                 <Form.Group className="mb-3" controlId="pix_code">
                   <Form.Control
-                    style={{ width: '100%' }}
+                    style={{ width: '100%', borderRadius: '10px' }}
                     type="text"
                     placeholder="Código Pix"
                     isInvalid={errors.pix_codeError}
-                    value={isEdit ? info.pix_code : event.pix_code}
+                    value={isEdit ? (info.pix_code ? info.pix_code : '') : event.pix_code}
                     disabled={event.type !== 'AUXILIO_FINANCEIRO' ? true : false}
                     onChange={(e) => {
                       handleChange('pix_code', e.target.value);
@@ -206,7 +209,7 @@ const ModalAction = ({ openModal, handleCloseModal, info, callback, isEdit }) =>
                   <Form.Control
                     as="textarea"
                     placeholder="Descrição"
-                    style={{ height: '300px' }}
+                    style={{ height: '300px', borderRadius: '10px' }}
                     isInvalid={errors.descriptionError}
                     value={isEdit ? info.description : event.description}
                     onChange={(e) => {

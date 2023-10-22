@@ -2,12 +2,12 @@ import React, { useContext, useState } from 'react';
 import { Context } from '../../common/context/context';
 import { useAlert } from 'react-alert';
 import { Container, Footer } from './styles';
-import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
-import { validateEmail } from '../../common/utils/validators';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { create } from '../../services/register';
 import { useHistory } from 'react-router';
 import CheckboxComponent from '../../common/components/Checkbox';
 import { states } from '../../enums/state';
+import loginLogo from '../../assets/login_logo.png';
 
 const Register = () => {
   const history = useHistory();
@@ -215,6 +215,7 @@ const Register = () => {
               <Col md={12}>
                 <Form.Group className="mb-3" controlId="name">
                   <Form.Control
+                    style={{ borderRadius: '10px' }}
                     type="text"
                     placeholder="Nome"
                     isInvalid={errors.nameError}
@@ -229,6 +230,7 @@ const Register = () => {
               <Col md={12}>
                 <Form.Group className="mb-3" controlId="description">
                   <Form.Control
+                    style={{ borderRadius: '10px' }}
                     type="text"
                     placeholder="Descrição"
                     isInvalid={errors.descriptionError}
@@ -245,6 +247,7 @@ const Register = () => {
               <Col md={6}>
                 <Form.Group className="mb-3" controlId="email">
                   <Form.Control
+                    style={{ borderRadius: '10px' }}
                     type="email"
                     placeholder="E-mail"
                     isInvalid={errors.emailError}
@@ -259,6 +262,7 @@ const Register = () => {
               <Col md={6}>
                 <Form.Group className="mb-3" controlId="phone">
                   <Form.Control
+                    style={{ borderRadius: '10px' }}
                     type="string"
                     placeholder="Telefone"
                     isInvalid={errors.phoneError}
@@ -287,6 +291,7 @@ const Register = () => {
                     <Form.Group className="mb-3" controlId="zip_code">
                       <Form.Control
                         type="string"
+                        style={{ borderRadius: '10px' }}
                         placeholder="CEP"
                         isInvalid={errors.zip_codeError}
                         value={user.zip_code}
@@ -301,6 +306,7 @@ const Register = () => {
                     <Form.Group className="mb-3" controlId="city">
                       <Form.Control
                         type="string"
+                        style={{ borderRadius: '10px' }}
                         placeholder="Rua"
                         isInvalid={errors.streetError}
                         value={user.street}
@@ -317,6 +323,7 @@ const Register = () => {
                     <Form.Group className="mb-3" controlId="district">
                       <Form.Control
                         type="string"
+                        style={{ borderRadius: '10px' }}
                         placeholder="Bairro"
                         isInvalid={errors.districtError}
                         value={user.district}
@@ -332,6 +339,7 @@ const Register = () => {
                       <Form.Control
                         type="string"
                         placeholder="Número"
+                        style={{ borderRadius: '10px' }}
                         isInvalid={errors.numberError}
                         value={user.number}
                         onChange={(e) => {
@@ -351,7 +359,8 @@ const Register = () => {
                           height: '37px',
                           borderColor: 'darkGrey',
                           backgroundColor: 'white',
-                          color: 'dimgrey'
+                          color: 'dimgrey',
+                          borderRadius: '10px'
                         }}
                         aria-label="Default select example"
                         value={user.state}
@@ -372,6 +381,7 @@ const Register = () => {
                       <Form.Control
                         type="string"
                         placeholder="Cidade"
+                        style={{ borderRadius: '10px' }}
                         isInvalid={errors.cityError}
                         value={user.city}
                         onChange={(e) => {
@@ -392,6 +402,7 @@ const Register = () => {
                   <Form.Control
                     type="password"
                     placeholder="Senha"
+                    style={{ borderRadius: '10px' }}
                     isInvalid={errors.passwordError}
                     value={user.password}
                     onChange={(e) => {
@@ -406,6 +417,7 @@ const Register = () => {
                   <Form.Control
                     type="password"
                     placeholder="Confirmar Senha"
+                    style={{ borderRadius: '10px' }}
                     isInvalid={errors.confirmPasswordError}
                     value={confirmPassword}
                     onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
@@ -418,16 +430,22 @@ const Register = () => {
               </Col>
             </Row>
 
-            <Button variant="primary" className="w-100 mb-3" onClick={() => handleSubmit()}>
+            <Button
+              style={{ backgroundColor: '#22c55e', borderColor: '#22c55e' }}
+              className="w-100 mb-3"
+              onClick={() => handleSubmit()}
+            >
               Cadastrar
             </Button>
 
-            <a href={window.origin + '/login'}>Já possuí conta? Realize seu login.</a>
+            <a href={window.origin + '/login'} style={{ color: 'dimgrey' }}>
+              Já possuí conta? Realize seu login.
+            </a>
           </Form>
         </Col>
       </Row>
       <Footer>
-        <p style={{ fontWeight: 'bold', color: 'white' }}>Hackathon Uni-FACEF</p>
+        <img src={loginLogo} style={{ width: '100%', height: '100%' }} />
       </Footer>
     </Container>
   );

@@ -5,7 +5,7 @@ const CheckboxComponent = ({ isChecked, handleCheckboxChange }) => {
   return (
     <label style={{ display: 'flex', alignItems: 'center' }}>
       <input
-        style={{ width: '20px', height: '20px', marginRight: '10px' }}
+        style={{ width: '20px', height: '20px', marginRight: '10px', backgroundColor: 'grey' }}
         type="checkbox"
         checked={isChecked}
         onChange={() => handleCheckboxChange()}

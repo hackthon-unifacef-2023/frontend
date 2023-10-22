@@ -6,6 +6,8 @@ import { Container, Footer } from './styles';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { validateEmail } from '../../common/utils/validators';
 import { useHistory } from 'react-router';
+import loginLogo from '../../assets/login_logo.png';
+import plantingLogo from '../../assets/planting.png';
 
 const Login = () => {
   const [user, setUser] = useState({ email: '', password: '' });
@@ -59,11 +61,13 @@ const Login = () => {
 
   return (
     <Container>
-      <Row>
-        <Col className="text-center">
-          <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Row style={{ justifyContent: 'center' }}>
+        <Col md={12} lg={12}>
+          <img src={plantingLogo} style={{ width: '300px', height: '300px' }} />
+          <Form className="text-center">
+            <Form.Group style={{ width: '300px' }} className="mb-3" controlId="formBasicEmail">
               <Form.Control
+                style={{ borderRadius: '10px' }}
                 type="email"
                 placeholder="E-mail"
                 isInvalid={emailError}
@@ -76,6 +80,7 @@ const Login = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Control
+                style={{ borderRadius: '10px' }}
                 type="password"
                 placeholder="Senha"
                 isInvalid={passwordError}
@@ -87,16 +92,26 @@ const Login = () => {
                 }}
               />
             </Form.Group>
-            <Button variant="primary" className="w-100 mb-3" onClick={() => handleSubmit()}>
-              Log In
+            <Button
+              style={{
+                backgroundColor: '#22c55e',
+                borderColor: '#22c55e',
+                fontWeight: 'bolder',
+                borderRadius: '10px'
+              }}
+              className="w-100 mb-3"
+              onClick={() => handleSubmit()}
+            >
+              Entrar
             </Button>
-
-            <a href={window.origin + '/cadastrar'}>Não possuí conta? Cadastre-se!</a>
+            <a style={{ color: 'dimgrey' }} href={window.origin + '/cadastrar'}>
+              Não possuí conta? Cadastre-se!
+            </a>
           </Form>
         </Col>
       </Row>
       <Footer>
-        <p style={{ fontWeight: 'bold', color: 'white' }}>Hackathon Uni-FACEF</p>
+        <img src={loginLogo} style={{ width: '100%', height: '100%' }} />
       </Footer>
     </Container>
   );

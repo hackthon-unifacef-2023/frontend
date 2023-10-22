@@ -109,9 +109,13 @@ const Admin = () => {
         </Row>
         <Row className="mt-5 w-100 mw-100">
           <Col className="d-flex justify-content-end">
-            <Pagination>
-              <Pagination.Item>1</Pagination.Item>
-            </Pagination>
+            <ul className="pagination modal-1">
+              <li>
+                <a style={{ fontSize: '10px' }} href="#" className="active">
+                  1
+                </a>
+              </li>
+            </ul>
           </Col>
         </Row>
       </Container>
