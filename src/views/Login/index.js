@@ -45,12 +45,15 @@ const Login = () => {
       return alert.error(response.message);
     }
 
-    setAuth(response.data.data);
+    localStorage.setItem('isAdmin', response.data.is_admin);
+    localStorage.setItem('TOKEN_KEY', response.data.token);
 
-    if (response.data.data.isAdmin) {
-      history.push('/admin/usuarios');
+    setAuth(response.data);
+
+    if (response.data.is_admin) {
+      history.push('/admin');
     } else {
-      history.push('/contador/usuarios');
+      history.push('/organizacoes');
     }
   };
 

@@ -4,38 +4,49 @@ import { Container, Nav } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 
 const NavbarComponent = () => {
-  let auth = window.location.pathname.split('/');
-  auth = auth[1];
+  const isAdmin = window.location.pathname;
   const history = useHistory();
 
+  const handleLogout = () => {
+    localStorage.removeItem('TOKEN_KEY');
+    history.push('/login');
+  };
+
   return (
-    <Navbar bg="primary" variant="dark">
+    <Navbar
+      expand="lg"
+      className="bg-body-tertiary"
+      style={{
+        backgroundColor: '#22c55e',
+        borderColor: '#22c55e',
+        display: 'flex',
+        justifyContent: 'flex-start'
+      }}
+    >
       <Container>
-        <Navbar.Brand>Hackathon Uni-FACEF</Navbar.Brand>
-        <Nav className="me-auto">
-          {auth === 'admin' ? (
-            <>
-              <Nav.Link onClick={() => history.push('/admin/usuarios')}>
-                Controle de Usuários
-              </Nav.Link>
-              <Nav.Link onClick={() => history.push('/admin/escritorios')}>
-                Controle de Escritórios
-              </Nav.Link>
-            </>
-          ) : (
-            <Nav.Link onClick={() => history.push('/contador/usuarios')}>
-              Controle de Clientes
+        <Navbar.Brand
+          style={{
+            color: 'white',
+            fontWeight: 'bolder',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            fontSize: '24px',
+            cursor: 'normal'
+          }}
+        >
+          {isAdmin === '/admin' ? 'Painel Admin' : 'Painel da Organização'}
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link
+              style={{ fontWeight: 'bolder', fontSize: '16px', color: 'white' }}
+              onClick={handleLogout}
+            >
+              Sair
             </Nav.Link>
-          )}
-          <Nav.Link
-            onClick={() => {
-              localStorage.removeItem('TOKEN_KEY');
-              history.push('/login');
-            }}
-          >
-            Logout
-          </Nav.Link>
-        </Nav>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

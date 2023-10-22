@@ -1,26 +1,23 @@
 import React, { useContext, useEffect } from 'react';
 import { Route } from 'react-router-dom';
-import { isAuthenticated } from '../services/auth';
 import { useHistory } from 'react-router';
 import { Context } from '../common/context/context';
 import Loading from '../common/components/Loading/index';
 import NavbarComponent from '../common/components/Navbar';
 import PropTypes from 'prop-types';
 
-const CustomRoute = ({ isPrivate, exact, path, component, isAdmin, isAccountant }) => {
+const CustomRoute = ({ isPrivate, exact, path, component }) => {
   const { loading } = useContext(Context);
-  const history = useHistory();
   const { setAuth } = useContext(Context);
+  const history = useHistory();
 
   useEffect(async () => {
     if (isPrivate) {
-      const isAuth = await isAuthenticated();
+      const hasToken = localStorage.getItem('TOKEN_KEY');
 
-      if (!isAuth.success) {
+      if (!hasToken) {
         history.push('/login');
       }
-
-      setAuth(isAuth.data.data);
     }
   }, []);
 
@@ -35,7 +32,6 @@ const CustomRoute = ({ isPrivate, exact, path, component, isAdmin, isAccountant 
 
 CustomRoute.propTypes = {
   isPrivate: PropTypes.bool,
-  isAdmin: PropTypes.bool,
   isAccountant: PropTypes.bool,
   exact: PropTypes.bool,
   path: PropTypes.string,
