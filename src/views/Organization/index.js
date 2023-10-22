@@ -121,17 +121,18 @@ const Organizations = () => {
             </Button>
           </Col>
         </Row>
-        <Row className="w-100 mw-100" style={{ gap: '10px', justifyContent: 'center' }}>
+        <Row className="w-100 mw-100" style={{ gap: '55px', justifyContent: 'center' }}>
           {info.map((item, index) => {
             return (
               <Col key={index} sm={6} md={3} lg={3}>
-                <Card style={{ width: '400px' }}>
+                <Card style={{ width: '300px' }}>
                   {renderImages(item.reason)}
                   <Card.Body>
                     <Card.Title>{item.name}</Card.Title>
                     <Card.Text>
                       Categoria: {item.type} <br />
-                      Razão: {item.reason}{' '}
+                      Razão: {item.reason} <br />
+                      Situação: {item.is_active ? 'Ativa' : 'Inativa'}
                     </Card.Text>
                     <Button
                       onClick={() => handleEvent(item)}

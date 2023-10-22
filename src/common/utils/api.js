@@ -4,7 +4,7 @@ export const axiosDefault = () => {
   const token = localStorage.getItem('TOKEN_KEY');
 
   const configs = {
-    baseURL: 'http://10.0.34.72:6969',
+    baseURL: 'http://localhost:6969',
     headers: {
       Authorization: `Bearer ${token}`,
       withCredentials: true
